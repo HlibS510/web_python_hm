@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Головна{% endblock %}
+
+{% block content %}
+    {% if results is not none %}
+        <h2>Search Results for "{{ input }}"</h2>
+        {% for post in results %}
+            <div class="post">
+                <p>{{ post.text }}</p>
+                {% if post.image %}
+                    <img src="{{ post.image }}" alt="">
+                {% endif %}
+            </div>
+        {% else %}
+            <p>No posts found matching your search.</p>
+        {% endfor %}
+        <hr>
+    {% endif %}
+
+    <h2>ВІТАЄМО У МОЄМУ БЛОЗІ!</h2>
+{% endblock %}

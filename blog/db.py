@@ -9,13 +9,13 @@ def get_db():
 
 def init_db():
     with get_db() as db:
-        db.execute("CREATE TABLE IF NOT EXISTS sections(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE NOT NULL, slug TEXT UNIQUE NOT NULL)")
-        db.execute("CREATE TABLE IF NOT EXISTS posts(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, text TEXT NOT NULL, section_id INTEGER, created_at DATETIME DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (section_id) REFERENCES sections(id))")
+        db.execute("CREATE TABLE IF NOT EXISTS sections (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE NOT NULL, slug TEXT UNIQUE NOT NULL)")
+        db.execute("CREATE TABLE IF NOT EXISTS posts (id INTEGER PRIMARY KEY AUTOINCREMENT, text TEXT NOT NULL, image TEXT, section_id INTEGER, created_at DATETIME DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (section_id) REFERENCES sections(id))")
 
-def get_blog_section():
+def get_blog_sections():
     with get_db() as db:
-        section = db.execute("SELECT * FROM sections")
-        return section
+        sections = db.execute("SELECT * FROM sections").fetchall()
+        return sections
 
 def get_section_by_slug(section_slug):
     with get_db() as db:
@@ -37,5 +37,13 @@ def create_new_post(text, image, section_id):
         db.execute("INSERT INTO posts (text, image, section_id) VALUES (?, ?, ?)", (text, image, section_id))
         db.commit()
 
+
+def find_post(user_input):
+    with get_db() as db:
+        search_term = f"%{user_input}%"
+        results = db.execute("SELECT * FROM posts WHERE text LIKE ?", (search_term,)).fetchall()
+        return results
+
 if __name__ == "__main__":
     init_db()
+    find_post("fg")

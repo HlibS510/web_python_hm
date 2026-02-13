@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for
 from db import *
+from login_db import *
 
 app = Flask(__name__)
+app.secret_key = 'egtrxcsaaadfrjikloptr'
 
-@app.route('/', methods=["GET", "POST"])
 @app.route('/', methods=["GET", "POST"])
 def index():
     sections = get_blog_sections()
@@ -15,6 +16,23 @@ def index():
         results = find_post(input)
 
     return render_template('index.html', sections=sections, results=results, input=input)
+
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        name = request.form.get('name')
+        password = request.form.get('password')
+
+        try:
+            if login(name, password):
+                print("Logged in")
+            else:
+                create_new_account(name, password)
+                print("Login failed")
+        except:
+            print("Error")
+    return render_template("login.html")
 
 @app.route('/<section_slug>')
 def section_page(section_slug):

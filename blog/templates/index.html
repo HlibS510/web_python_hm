@@ -15,6 +15,15 @@
             <p>No posts found matching your search.</p>
         {% endfor %}
         <hr>
+    {% else %}
+        {% for post in posts %}
+            <div class="post">
+                <p>{{ post.text }}</p>
+                {% if post.image %}
+                    <img src="{{ post.image }}" alt="">
+                {% endif %}
+            </div>
+        {% endfor %}
     {% endif %}
 
     <h2>ВІТАЄМО У МОЄМУ БЛОЗІ!</h2>

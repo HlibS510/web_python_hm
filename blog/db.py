@@ -40,10 +40,9 @@ def create_new_post(text, image, section_id):
 
 def find_post(user_input):
     with get_db() as db:
-        search_term = f"%{user_input}%"
-        results = db.execute("SELECT * FROM posts WHERE text LIKE ?", (search_term,)).fetchall()
+        search_r = f"%{user_input}%"
+        results = db.execute("SELECT * FROM posts WHERE text LIKE ?", (search_r,)).fetchall()
         return results
 
 if __name__ == "__main__":
     init_db()
-    find_post("fg")

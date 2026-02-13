@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Блог{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
 <header>
-    <h1><a href="{{ url_for('index') }}">Мій блог</a></h1>
+    <h1><a href="{{ url_for('index') }}" class="btn">Мій блог</a></h1>
 
     <form action="{{ url_for('index') }}" method="POST" style="display: inline;">
         <input type="text" name="input" placeholder="Search..." required>
@@ -18,16 +18,17 @@
     <nav>
         <div>
             {% for section in sections %}
-                <a href="{{ url_for('section_page', section_slug=section.slug) }}">
+                <a href="{{ url_for('section_page', section_slug=section.slug) }}" class="btn">
                     {{ section.name }}
                 </a>
             {% endfor %}
         </div>
     </nav>
+    <h1><a href="{{ url_for('register') }}" class="btn">login</a></h1>
 </header>
 
 <hr>
-<a href="{{ url_for('add_post') }}">➕ Додати пост</a>
+<a href="{{ url_for('add_post') }}" class="btn">➕ Додати пост</a>
 
 {% block content %}{% endblock %}
 

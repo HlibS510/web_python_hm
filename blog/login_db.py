@@ -12,11 +12,6 @@ def init_db():
         db.execute("CREATE TABLE IF NOT EXISTS logins(name TEXT UNIQUE NOT NULL, password TEXT NOT NULL)")
         db.commit()
 
-def add_money(name, money):
-    with get_db() as db:
-        db.execute("UPDATE logins SET money = money + ? WHERE name = ?", (money, name))
-        db.commit()
-
 def create_new_account(name, password):
     try:
         with get_db() as db:

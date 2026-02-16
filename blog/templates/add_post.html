@@ -1,23 +1,22 @@
 {% extends "base.html" %}
-{% block title %}Додати пост{% endblock %}
-
 {% block content %}
-<h2>Новий пост</h2>
+<link rel="stylesheet" href="{{ url_for('static', filename='add_post.css') }}">
 
-<form method="post">
-    <label for="text">Текст посту:</label><br>
-    <textarea name="text" id="text" required rows="5" style="width: 100%;"></textarea>
-    <br><br>
+<div id="add-post-page"> <h2>Новий пост</h2>
+    <form method="post">
+        <label for="text">Текст посту:</label>
+        <textarea name="text" id="text"></textarea>
 
-    <label for="image">Посилання на зображення:</label><br>
-    <input type="url" name="image" id="image" placeholder="https://example.com/image.jpg"><br><br>
+        <label for="image">Посилання на зображення:</label>
+        <input type="url" name="image" id="image">
 
-    <label for="section">Розділ:</label><br>
-    <select name="section" id="section" required> {% for section in sections %}
-        <option value="{{ section.id }}">{{ section.name }}</option>
-        {% endfor %}
-    </select>
+        <select name="section" id="section" required>
+            {% for section in sections %}
+                <option value="{{ section.id }}">{{ section.name }}</option>
+            {% endfor %}
+        </select>
 
-    <button type="submit">Опублікувати</button>
-</form>
+        <button type="submit">Опублікувати</button>
+    </form>
+</div>
 {% endblock %}

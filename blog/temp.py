@@ -8,9 +8,14 @@ conn.row_factory = sqlite3.Row
 conn.executemany("""
             INSERT INTO sections (name, slug)
             VALUES (?, ?)""",
-                 [("Мої гоббі", "my-hobbies"),
-                  ("Керамічні вироби", "ceramics"),
-                  ("Аніме", "anime")],
+                 [("Lifestyle", "lifestyle"),
+                  ("Food", "food"),
+                  ("Tutorials", "tutorials"),
+                  ("Travel", "travel"),
+                  ("News", "news"),
+                  ("Gaming", "gaming"),
+                  ("Questions", "questions"),
+                  ("Technology", "technology")],
                  )
 conn.commit()
 conn.close()

@@ -10,7 +10,7 @@ def get_db():
 def init_db():
     with get_db() as db:
         db.execute("CREATE TABLE IF NOT EXISTS sections (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE NOT NULL, slug TEXT UNIQUE NOT NULL)")
-        db.execute("CREATE TABLE IF NOT EXISTS posts (id INTEGER PRIMARY KEY AUTOINCREMENT, text TEXT NOT NULL, image TEXT, section_id INTEGER, created_at DATETIME DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (section_id) REFERENCES sections(id))")
+        db.execute("CREATE TABLE IF NOT EXISTS posts (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, text TEXT NOT NULL, image TEXT, section_id INTEGER, likes INTEGER DEFAULT 0, created_at DATETIME DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (section_id) REFERENCES sections(id))")
 
 def get_blog_sections():
     with get_db() as db:
@@ -32,16 +32,20 @@ def get_section_posts(section_id):
         posts = db.execute("SELECT * FROM posts WHERE section_id = ? ORDER BY created_at DESC", (section_id,)).fetchall()
         return posts
 
-def create_new_post(text, image, section_id):
+def create_new_post(name, text, image, section_id):
     with get_db() as db:
-        db.execute("INSERT INTO posts (text, image, section_id) VALUES (?, ?, ?)", (text, image, section_id))
+        db.execute("INSERT INTO posts (name, text, image, section_id) VALUES (?, ?, ?, ?)", (name, text, image, section_id))
         db.commit()
 
+def like(post_id):
+    with get_db() as db:
+        db.execute("UPDATE posts SET likes = likes + ? WHERE id = ?", (1, post_id))
+        db.commit()
 
 def find_post(user_input):
     with get_db() as db:
-        search_r = f"%{user_input}%"
-        results = db.execute("SELECT * FROM posts WHERE text LIKE ?", (search_r,)).fetchall()
+        search_in = f"%{user_input}%"
+        results = db.execute("SELECT * FROM posts WHERE text LIKE ?", (search_in,)).fetchall()
         return results
 
 if __name__ == "__main__":

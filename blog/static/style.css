@@ -17,12 +17,6 @@ header {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-main {
-
-}
-
-
-
 .user_name_text{
     color: #708090;
     font-weight: bold;
@@ -45,8 +39,7 @@ nav a {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     width: 80%;
     max-width: 1000px;
-    margin-top: 20px;
-    margin: auto;
+    margin: 20px auto 0
 }
 
 img {

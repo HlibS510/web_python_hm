@@ -8,7 +8,7 @@
 </head>
 <body>
     <form action="{{ url_for('login') }}" method="POST">
-        <p>Log in</p>
+        <p>Sing in</p>
         <div class="input">
             <input type="text" name="name" placeholder="Acccount name" required><br>
             <input type="text" name="password" placeholder="Password" required><br>
@@ -19,7 +19,7 @@
             <p class="error-msg">{{ error }}</p>
         {% endif %}
 
-        <p class="sing_in">Don't have account? <a href="{{ url_for('register') }}" class="url_btn">Sing in</a></p>
+        <p class="sing_in">Have account? <a href="{{ url_for('login') }}" class="url_btn">Log in</a></p>
     </form>
 </body>
 </html>

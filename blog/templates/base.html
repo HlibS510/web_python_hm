@@ -2,7 +2,7 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Блог{% endblock %}</title>
+    <title>{% block title %}blog{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -27,7 +27,7 @@
         </div>
     </nav>
     <a href="{{ url_for('add_post') }}" class="url_btn">Make post</a>
-    <a href="{{ url_for('register') }}" class="btn">{{ name }}</a>
+    <a href="{{ url_for('login') }}" class="btn">{{ name }}</a>
 </header>
 
 <hr>

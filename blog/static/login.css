@@ -3,7 +3,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  margin: 0;
+  margin: auto;
   background-color: #E6E6FA;
   font-family: 'Segoe UI', sans-serif;
 }
@@ -22,6 +22,34 @@ label {
   margin-bottom: 8px;
   font-weight: 600;
   color: #36454F;
+}
+
+form p {
+  text-align: center;
+  width: 100%;
+  margin-top: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #36454F;
+}
+
+.sing_in{
+  font-size: 20px;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.error-msg{
+  color: #FE4A49;
+  font-size: 15px;
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.url_btn {
+  color: #3ABEFF;
+  text-decoration: none;
 }
 
 input[type=text],
